@@ -1,0 +1,12 @@
+- Java 21
+- PostgreSQL (latest
+- pgAdmin
+- Node 20.17.0
+
+-- Criar imagem docker para PostgreSQL
+docker run -d --name clinicapro_postgres -e POSTGRES_PASSWORD=Cl1n1c4Pr0 -e POSTGRES_INITDB_ARGS="--no-locale --encoding=UTF8 --lc-collate=C --lc-ctype=C" -e PGTZ="America/Sao_Paulo" -e POSTGRES_DB=clinicaprodb -p 5432:5432 postgres:latest
+
+-- Link pgAdmin
+https://www.postgresql.org/ftp/pgadmin/pgadmin4/v8.11/windows/
+
+-- 

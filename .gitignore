@@ -1,0 +1,75 @@
+clinicapro-api/HELP.md
+clinicapro-api/target/
+clinicapro-api/!.mvn/wrapper/maven-wrapper.jar
+clinicapro-api/!**/src/main/**/target/
+clinicapro-api/!**/src/test/**/target/
+
+### STS ###
+clinicapro-api/.apt_generated
+clinicapro-api/.classpath
+clinicapro-api/.factorypath
+clinicapro-api/.project
+clinicapro-api/.settings
+clinicapro-api/.springBeans
+clinicapro-api/.sts4-cache
+
+### IntelliJ IDEA ###
+clinicapro-api/.idea
+clinicapro-api/*.iws
+clinicapro-api/*.iml
+clinicapro-api/*.ipr
+
+### NetBeans ###
+clinicapro-api//nbproject/private/
+clinicapro-api//nbbuild/
+clinicapro-api//dist/
+clinicapro-api//nbdist/
+clinicapro-api//.nb-gradle/
+clinicapro-api/build/
+clinicapro-api/!**/src/main/**/build/
+clinicapro-api/!**/src/test/**/build/
+
+### VS Code ###
+clinicapro-api/.vscode/
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+clinicapro-spa/dist
+clinicapro-spa/tmp
+clinicapro-spa/out-tsc
+clinicapro-spa/bazel-out
+
+# Node
+clinicapro-spa/node_modules
+clinicapro-spa/npm-debug.log
+clinicapro-spa/yarn-error.log
+
+# IDEs and editors
+clinicapro-spa/.idea/
+clinicapro-spa/.project
+clinicapro-spa/.classpath
+clinicapro-spa/.c9/
+clinicapro-spa/*.launch
+clinicapro-spa/.settings/
+clinicapro-spa/*.sublime-workspace
+
+# Visual Studio Code
+clinicapro-spa/.vscode
+clinicapro-spa/.vscode/*
+clinicapro-spa/.history/*
+
+# Miscellaneous
+clinicapro-spa/.angular/cache
+clinicapro-spa/.sass-cache/
+clinicapro-spa/connect.lock
+clinicapro-spa/coverage
+clinicapro-spa/libpeerconnection.log
+clinicapro-spa/testem.log
+clinicapro-spa/typings
+
+# System files
+clinicapro-spa/.DS_Store
+clinicapro-spa/Thumbs.db
+

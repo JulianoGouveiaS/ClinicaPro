@@ -9,4 +9,11 @@ docker run -d --name clinicapro_postgres -e POSTGRES_PASSWORD=Cl1n1c4Pr0 -e POST
 -- Link pgAdmin
 https://www.postgresql.org/ftp/pgadmin/pgadmin4/v8.11/windows/
 
--- 
+-- Documentação base componentes PrimeNG
+https://primeng.org/installation
+
+-- Fullcalendar 
+https://fullcalendar.io/
+
+-- Link template Sakai PrimeNG
+https://github.com/primefaces/sakai-ng

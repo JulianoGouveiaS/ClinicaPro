@@ -9,6 +9,8 @@ docker run -d --name clinicapro_postgres -e POSTGRES_PASSWORD=Cl1n1c4Pr0 -e POST
 -- pgAdmin (após rodar o container, acesse localhost:8090 com login e senha escritos no comando)
 docker run -p 8090:80 -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' -e 'PGADMIN_DEFAULT_PASSWORD=pgadmin' -d dpage/pgadmin4
 
+Na conexão do pgadmin, o host do banco é: host.docker.internal
+
 -- Documentação base componentes PrimeNG
 https://primeng.org/installation
 

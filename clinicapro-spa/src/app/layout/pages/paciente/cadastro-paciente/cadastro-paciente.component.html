@@ -1,30 +1,36 @@
+<p-toolbar>
+    <div class="p-toolbar-group-start">
+        <botao-salvar (click)="salvar()"></botao-salvar>
+        <botao-limpar (click)="limpar()"></botao-limpar>
+    </div>
+</p-toolbar>
 <div class="grid">
     <div class="col-12 md:col-6">
         <div class="card p-fluid">
             <h5>Informações Básicas</h5>
             <div class="field">
                 <label htmlFor="name1">Nome</label>
-                <input pInputText id="name1" type="text"/>
+                <input pInputText id="nome" [(ngModel)]="paciente.nome" type="text"/>
             </div>
             <div class="field">
                 <label>Documento</label>
-                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+                <input pInputText id="documento" [(ngModel)]="paciente.documento" type="text"/>
             </div>
             <div class="field">
                 <label htmlFor="name1">Data de Nascimento</label>
-                <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+                <p-calendar [showIcon]="true" inputId="icon" [(ngModel)]="paciente.dataNascimento"></p-calendar>
             </div>
             <div class="field">
                 <label htmlFor="name1">Telefone</label>
-                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+                <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.telefone" [min]="0" [max]="100"/>
             </div>
             <div class="field">
                 <label htmlFor="email1">Email</label>
-                <input pInputText id="email1" type="text"/>
+                <input pInputText id="email1" [(ngModel)]="paciente.email" type="text"/>
             </div>
             <div class="field">
                 <label htmlFor="age1">Idade</label>
-                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+                <p-inputNumber [locale]="'pt-BR'" [showButtons]="false" [(ngModel)]="paciente.idade" [min]="0" [max]="100"/>
             </div>
         </div>
 
@@ -38,40 +44,33 @@
             <h5>Endereço</h5>
             <div class="field">
                 <label htmlFor="name1">CEP</label>
-                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+                <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.endereco.cep" [min]="0" [max]="100"/>
             </div>
             <div class="p-formgrid grid">
                 <div class="field col-9">
                     <label htmlFor="logradouro1">Logradouro</label>
-                    <input pInputText id="logradouro1" type="text"/>
+                    <input pInputText id="logradouro1" [(ngModel)]="paciente.endereco.logradouro" type="text"/>
                 </div>
                 <div class="field col-3">
                     <label htmlFor="numero1">Número</label>
-                    <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+                    <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.endereco.numero" [min]="0" [max]="100"/>
                 </div>
             </div>
             <div class="field">
                 <label htmlFor="complemento1">Complemento</label>
-                <input pInputText id="complemento1" type="text"/>
+                <input pInputText id="complemento1" [(ngModel)]="paciente.endereco.complemento" type="text"/>
             </div>
             <div class="field">
                 <label htmlFor="bairro1">Bairro</label>
-                <input pInputText id="bairro1" type="text"/>
+                <input pInputText id="bairro1" [(ngModel)]="paciente.endereco.bairro" type="text"/>
             </div>
             <div class="field">
                 <label htmlFor="cidade1">Cidade</label>
-                <input pInputText id="cidade1" type="text"/>
+                <input pInputText id="cidade1" [(ngModel)]="paciente.endereco.cidade" type="text"/>
             </div>
             <div class="field">
                 <label htmlFor="estado1">Estado</label>
-                <input pInputText id="estado1" type="text"/>
-            </div>
-        </div>
-        <div class="card p-fluid">
-            <h5>Pagamento</h5>
-            <div class="field">
-                <label htmlFor="">Bairro</label>
-                <input pInputText id="" type="text"/>
+                <input pInputText id="estado1" [(ngModel)]="paciente.endereco.estado" type="text"/>
             </div>
         </div>
     </div>

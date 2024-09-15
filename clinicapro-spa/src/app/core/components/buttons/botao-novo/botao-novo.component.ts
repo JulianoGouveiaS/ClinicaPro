@@ -32,7 +32,7 @@ export class BotaoNovoComponent {
     }
 
     onClick() {
-        if (isString(this.rota)) {
+        if (this.rota != null && this.rota != undefined && String(this.rota).trim().length > 0) {
             this.router.navigateByUrl(this.rota);
         } else {
             this.router.navigate([`${this.router.url}/cadastro`], { preserveFragment: true });

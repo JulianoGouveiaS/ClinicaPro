@@ -40,4 +40,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage());
     }
 
+    @ExceptionHandler(UsuarioNaoEncontradoException.class)
+    private ResponseEntity<String> exceptionHandler(UsuarioNaoEncontradoException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(UsuarioTemporarioInvalido.class)
+    private ResponseEntity<String> exceptionHandler(UsuarioTemporarioInvalido exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+
 }

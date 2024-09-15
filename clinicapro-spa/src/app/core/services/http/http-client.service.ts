@@ -44,6 +44,7 @@ export class HttpClientService {
 
             request.subscribe(
                 (response) => {
+                    console.log('12342341234132', endpoint)
                     this.ngxUiLoaderService.stop(endpoint);
                     resolve(response);
                 },
@@ -59,7 +60,7 @@ export class HttpClientService {
                             this.ngxUiLoaderService.stop(endpoint);
                         }
                     }
-
+                    console.log('asdfasdfasdf', endpoint)
                     resolve(null);
                 }
             );

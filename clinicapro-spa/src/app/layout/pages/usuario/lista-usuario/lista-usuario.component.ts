@@ -40,6 +40,4 @@ export class ListaUsuarioComponent implements OnInit {
         this.usuarios = await this.usuarioService.buscarPorUsuarioLogado() || [];
     }
 
-    limpar() {}
-
 }

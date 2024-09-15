@@ -2,9 +2,7 @@ package br.com.clinicapro.api.service;
 
 import br.com.clinicapro.api.domain.Usuario;
 import br.com.clinicapro.api.dto.LoginRequest;
-import br.com.clinicapro.api.exception.AcessoNegadoException;
-import br.com.clinicapro.api.exception.JwtAuthenticationTokenException;
-import br.com.clinicapro.api.exception.LoginException;
+import br.com.clinicapro.api.exception.*;
 import br.com.clinicapro.api.repository.UsuarioRepository;
 import br.com.clinicapro.api.util.JwtUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -65,4 +63,20 @@ public class UsuarioService {
         }
         throw new AcessoNegadoException();
     }
+
+    public Usuario buscarPorId(Usuario usuarioLogado, Long id) {
+        if (usuarioLogado.isAdmin()) {
+            return this.usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNaoEncontradoException(id));
+        }
+        if (usuarioLogado.isProfissional()) {
+            Usuario usuarioEncontrado = this.usuarioRepository.findById(id)
+                    .orElseThrow(() -> new UsuarioNaoEncontradoException(id));
+            if (!usuarioEncontrado.isUsuarioTemporarioDoProfissional(usuarioLogado)) {
+                throw new UsuarioTemporarioInvalido(id);
+            }
+            return usuarioEncontrado;
+        }
+        throw new AcessoNegadoException();
+    }
+
 }

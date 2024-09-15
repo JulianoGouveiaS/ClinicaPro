@@ -114,4 +114,14 @@ public class Usuario implements Serializable {
         return getPermissoes() != null && getPermissoes().stream().anyMatch(Permissao::isProfissional);
     }
 
+    /**
+     * Se o usuário é temporário e a pessoa dele é a mesma pessoa do usuário passado via parametro
+     * então é um usuário temporário do mesmo
+     * @param usuarioProfissional
+     * @return verdadeiro ou falso
+     */
+    public boolean isUsuarioTemporarioDoProfissional(Usuario usuarioProfissional) {
+        return Boolean.TRUE.equals(this.getIndicadorUsuarioTemporario())
+            && this.getPessoa().getId().equals(usuarioProfissional.getPessoa().getId());
+    }
 }

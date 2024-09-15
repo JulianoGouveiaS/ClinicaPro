@@ -32,4 +32,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarPorUsuarioLogado(usuarioLogado));
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority(" + Permissao.Authority.ADMIN + "," + Permissao.Authority.PROFISSIONAL + ")")
+    public ResponseEntity<?> buscarPorId(JwtAuthenticationToken token, @PathVariable Long id) {
+        Usuario usuarioLogado = usuarioService.getUsuarioToken(token);
+        return ResponseEntity.ok(usuarioService.buscarPorId(usuarioLogado, id));
+    }
+
 }

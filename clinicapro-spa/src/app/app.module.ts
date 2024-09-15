@@ -17,7 +17,7 @@ import { PhotoService } from './demo/service/photo.service';
 import { ProductService } from './demo/service/product.service';
 import { AppLayoutModule } from './layout/app.layout.module';
 
-registerLocaleData(localePt)
+registerLocaleData(localePt);
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],

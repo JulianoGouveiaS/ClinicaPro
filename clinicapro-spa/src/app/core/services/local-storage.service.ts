@@ -31,7 +31,6 @@ export class LocalStorageService {
                     const storedValue = localStorage.getItem(cryptKey) || '';
                     const decryptedValue = this.decrypt(storedValue);
                     if (!lodash.isEmpty(decryptedValue)) {
-                        console.log(JSON.parse(decryptedValue))
                         return JSON.parse(decryptedValue);
                     }
                 }

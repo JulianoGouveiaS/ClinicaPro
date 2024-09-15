@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { LayoutService } from './service/app.layout.service';
+import { LayoutService } from '../../service/app.layout.service';
 
 @Component({
     selector: 'app-menu',
@@ -24,6 +24,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'UI Components',
                 items: [
                     { label: 'Agenda', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/agenda'] },
+                    { label: 'Pacientes', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/paciente'] },
                     { label: 'Usuários', icon: 'pi pi-fw pi-id-card', routerLink: ['/usuarios'] },
                     { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'] },
                     { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },

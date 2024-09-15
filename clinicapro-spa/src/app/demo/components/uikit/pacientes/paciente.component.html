@@ -1,0 +1,108 @@
+<div class="grid">
+    <div class="col-12 md:col-6">
+        <div class="card p-fluid">
+            <h5>Informações Básicas</h5>
+            <div class="field">
+                <label htmlFor="name1">Nome</label>
+                <input pInputText id="name1" type="text"/>
+            </div>
+            <div class="field">
+                <label>CPF</label>
+                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+            </div>
+            <div class="field">
+                <label htmlFor="email1">RG</label>
+                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+            </div>
+            <div class="field">
+                <label htmlFor="name1">Data de Nascimento</label>
+                <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
+            </div>
+            <div class="field">
+                <label htmlFor="name1">Telefone</label>
+                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+            </div>
+            <div class="field">
+                <label htmlFor="email1">Email</label>
+                <input pInputText id="email1" type="text"/>
+            </div>
+            <div class="field">
+                <label htmlFor="age1">Idade</label>
+                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+            </div>
+        </div>
+
+        <div class="card p-fluid">
+            <h5>Família</h5>
+            <div class="field col">
+                <label htmlFor="name2">Nome da Mãe</label>
+                <input pInputText id="nomemae" type="text"/>
+            </div>
+            <div class="field col">
+                <label htmlFor="name2">Profissão da Mãe</label>
+                <input pInputText id="profmae" type="text"/>
+            </div>
+            <div class="field col">
+                <label htmlFor="email2">Nome do Pai</label>
+                <input pInputText id="nomepai" type="text"/>
+            </div>
+            <div class="field col">
+                <label htmlFor="name2">Profissão do Pai</label>
+                <input pInputText id="profpai" type="text"/>
+            </div>
+            <div class="field col">
+                <label htmlFor="name2">Nome do Conjuge</label>
+                <input pInputText id="nomeconjuge" type="text"/>
+            </div>
+            <div class="field col">
+                <label htmlFor="name2">Profissão do Conjuge</label>
+                <input pInputText id="profconjuge" type="text"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-6">
+        <div class="card p-fluid">
+            <h5>Endereço</h5>
+            <div class="field">
+                <label htmlFor="name1">CEP</label>
+                <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+            </div>
+            <div class="p-formgrid grid">
+                <div class="field col-9">
+                    <label htmlFor="logradouro1">Logradouro</label>
+                    <input pInputText id="logradouro1" type="text"/>
+                </div>
+                <div class="field col-3">
+                    <label htmlFor="numero1">Número</label>
+                    <p-inputNumber [showButtons]="false" [min]="0" [max]="100"/>
+                </div>
+            </div>
+            <div class="field">
+                <label htmlFor="complemento1">Complemento</label>
+                <input pInputText id="complemento1" type="text"/>
+            </div>
+            <div class="field">
+                <label htmlFor="bairro1">Bairro</label>
+                <input pInputText id="bairro1" type="text"/>
+            </div>
+            <div class="field">
+                <label htmlFor="cidade1">Cidade</label>
+                <input pInputText id="cidade1" type="text"/>
+            </div>
+            <div class="field">
+                <label htmlFor="estado1">Estado</label>
+                <input pInputText id="estado1" type="text"/>
+            </div>
+        </div>
+        <div class="card p-fluid">
+            <h5>Pagamento</h5>
+            <div class="field">
+                <label htmlFor="">Bairro</label>
+                <input pInputText id="" type="text"/>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

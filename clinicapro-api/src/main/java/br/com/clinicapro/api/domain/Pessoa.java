@@ -29,6 +29,9 @@ public class Pessoa implements Serializable {
     @Column(name = "telefone")
     private String telefone;
 
+    @Column(name = "data_cadastro")
+    private LocalDate dataCadastro;
+
     public Long getId() {
         return id;
     }
@@ -75,5 +78,13 @@ public class Pessoa implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }

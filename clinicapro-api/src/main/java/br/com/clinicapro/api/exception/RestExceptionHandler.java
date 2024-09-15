@@ -34,4 +34,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 
+    @ExceptionHandler(JwtAuthenticationTokenException.class)
+    private ResponseEntity<String> exceptionHandler(JwtAuthenticationTokenException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage());
+    }
+
 }

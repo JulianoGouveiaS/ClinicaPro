@@ -2,11 +2,13 @@ package br.com.clinicapro.api.service;
 
 import br.com.clinicapro.api.domain.Usuario;
 import br.com.clinicapro.api.dto.LoginRequest;
+import br.com.clinicapro.api.exception.JwtAuthenticationTokenException;
 import br.com.clinicapro.api.exception.LoginException;
 import br.com.clinicapro.api.repository.UsuarioRepository;
 import br.com.clinicapro.api.util.JwtUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -42,6 +44,13 @@ public class UsuarioService {
         } else {
             throw new LoginException("Usuário e/ou senha inválido");
         }
+    }
+
+    public Usuario getUsuarioToken(JwtAuthenticationToken token) {
+        if (token == null || !StringUtils.hasText(token.getName())) {
+            throw new JwtAuthenticationTokenException("Token inválido. Faça login novamente.");
+        }
+        return usuarioRepository.findByLogin(token.getName());
     }
 
 }

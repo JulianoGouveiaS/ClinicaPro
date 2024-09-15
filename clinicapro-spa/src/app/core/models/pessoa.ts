@@ -1,3 +1,5 @@
+import {Endereco} from "./Endereco";
+
 export class Pessoa {
     id: number;
     nome: string;
@@ -6,4 +8,6 @@ export class Pessoa {
     email: string;
     telefone: string;
     dataCadastro: Date;
+    idade: number;
+    endereco: Endereco;
 }

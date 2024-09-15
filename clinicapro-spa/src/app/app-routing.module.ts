@@ -18,6 +18,8 @@ import { authGuard } from './core/guard/auth.guard';
                     { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
                     { path: 'usuarios', loadChildren: () => import('./layout/pages/usuario/usuario.module').then(m => m.UsuarioModule) },
+                    { path: 'paciente', loadChildren: () => import('./layout/pages/paciente/paciente.module').then(m => m.PacienteModule) },
+                    { path: 'agenda', loadChildren: () => import('./layout/pages/agenda/agenda.module').then(m => m.AgendaModule) },
                 ]
             },
             { path: 'auth', loadChildren: () => import('./layout/login/login.module').then(m => m.LoginModule) },

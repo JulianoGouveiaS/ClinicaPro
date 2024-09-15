@@ -43,6 +43,14 @@ public class Permissao implements Serializable {
         this.indicadorPermissaoPublica = indicadorPermissaoPublica;
     }
 
+    public boolean isAdmin() {
+        return "ADMIN".equals(this.getDescricao());
+    }
+
+    public boolean isProfissional() {
+        return "PROFISSIONAL".equals(this.getDescricao());
+    }
+
     public final static class Authority {
         public static final String ADMIN = "'SCOPE_ADMIN'";
         public static final String PROFISSIONAL = "'SCOPE_PROFISSIONAL'";

@@ -105,4 +105,13 @@ public class Usuario implements Serializable {
     public void setPermissoes(Set<Permissao> permissoes) {
         this.permissoes = permissoes;
     }
+
+    public boolean isAdmin() {
+        return getPermissoes() != null && getPermissoes().stream().anyMatch(Permissao::isAdmin);
+    }
+
+    public boolean isProfissional() {
+        return getPermissoes() != null && getPermissoes().stream().anyMatch(Permissao::isProfissional);
+    }
+
 }

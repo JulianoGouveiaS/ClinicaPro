@@ -13,7 +13,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({
             AccessDeniedException.class,
-            AuthorizationDeniedException.class
+            AuthorizationDeniedException.class,
+            AcessoNegadoException.class
     })
     public ResponseEntity<String> accessDeniedExceptionHandler() {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não tem permissão para acessar este recurso.");

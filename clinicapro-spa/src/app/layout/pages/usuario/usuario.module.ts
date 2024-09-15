@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UsuariosRoutingModule } from './usuarios-routing.module';
+import { UsuarioRoutingModule } from './usuario-routing.module';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CoreComponentsModule } from 'src/app/core/components/core-components.module';
 
@@ -9,9 +9,9 @@ import { CoreComponentsModule } from 'src/app/core/components/core-components.mo
   declarations: [],
   imports: [
     CommonModule,
-    UsuariosRoutingModule,
+    UsuarioRoutingModule,
     ToolbarModule,
     CoreComponentsModule,
   ]
 })
-export class UsuariosModule { }
+export class UsuarioModule { }

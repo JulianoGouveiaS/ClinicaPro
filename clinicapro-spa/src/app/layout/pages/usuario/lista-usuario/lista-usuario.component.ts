@@ -17,10 +17,10 @@ import { ProductService } from 'src/app/demo/service/product.service';
     CardModule,
     TableModule,
   ],
-  templateUrl: './lista-usuarios.component.html',
-  styleUrl: './lista-usuarios.component.scss'
+  templateUrl: './lista-usuario.component.html',
+  styleUrl: './lista-usuario.component.scss'
 })
-export class ListaUsuariosComponent implements OnInit {
+export class ListaUsuarioComponent implements OnInit {
 
     products: Product[] = [];
 

@@ -1,0 +1,42 @@
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+    selector: 'botao-novo',
+    template: `
+        <p-button
+            [label]="getLabel()"
+            icon="pi pi-plus"
+            styleClass="p-button-raised p-button-success p-button-text"
+            (click)="onClick()"
+            [pTooltip]="getTooltip()"
+            tooltipPosition="bottom">
+        </p-button>
+    `
+})
+
+export class BotaoNovoComponent {
+
+    label: string = 'Novo';
+
+    @Input()
+    navegar: boolean = true;
+    @Input()
+    icone: boolean = false;
+
+    constructor(private router: Router) {}
+
+    getLabel() {
+        return this.icone ? '' : this.label;
+    }
+
+    onClick() {
+        if (this.navegar) {
+            this.router.navigate([`${this.router.url}/cadastro`], { preserveFragment: true });
+        }
+    }
+
+    getTooltip() {
+        return this.icone ? this.label : '';
+    }
+}

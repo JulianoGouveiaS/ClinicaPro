@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "pessoa")
+@Inheritance(strategy = InheritanceType.JOINED) // Isso cria tabelas separadas para Pessoa e Paciente
 public class Pessoa implements Serializable {
 
     @Id

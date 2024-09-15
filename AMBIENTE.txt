@@ -19,3 +19,8 @@ https://fullcalendar.io/
 
 -- Link template Sakai PrimeNG
 https://github.com/primefaces/sakai-ng
+
+-- Gerando a chave publica e privada para o projeto
+1 - entre na pasta src/main/resource do projeto
+2 - use o comando: openssl genrsa > app.key
+3 - depois use: openssl rsa -in app.key -pubout -out app.pub

@@ -43,18 +43,9 @@ public class Permissao implements Serializable {
         this.indicadorPermissaoPublica = indicadorPermissaoPublica;
     }
 
-    public enum Values {
-        ADMIN(1L),
-        PROFISSIONAL(2L);
-
-        Long id;
-
-        Values(Long id) {
-            this.id = id;
-        }
-
-        public Long getId() {
-            return id;
-        }
+    public final static class Authority {
+        public static final String ADMIN = "'SCOPE_ADMIN'";
+        public static final String PROFISSIONAL = "'SCOPE_PROFISSIONAL'";
     }
+
 }

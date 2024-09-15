@@ -17,8 +17,6 @@ export class BotaoLimparComponent {
     label: string = 'Limpar';
 
     @Input()
-    navegar: boolean = true;
-    @Input()
     icone: boolean = false;
 
     getLabel() {

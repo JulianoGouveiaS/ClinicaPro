@@ -17,8 +17,6 @@ export class BotaoExcluirComponent {
     label: string = 'Excluir';
 
     @Input()
-    navegar: boolean = true;
-    @Input()
     icone: boolean = false;
 
     getLabel() {

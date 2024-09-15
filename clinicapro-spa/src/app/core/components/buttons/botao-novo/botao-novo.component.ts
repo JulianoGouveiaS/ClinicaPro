@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { isString } from 'lodash';
 
 @Component({
     selector: 'botao-novo',
@@ -20,7 +21,7 @@ export class BotaoNovoComponent {
     label: string = 'Novo';
 
     @Input()
-    navegar: boolean = true;
+    rota: string;
     @Input()
     icone: boolean = false;
 
@@ -31,7 +32,9 @@ export class BotaoNovoComponent {
     }
 
     onClick() {
-        if (this.navegar) {
+        if (isString(this.rota)) {
+            this.router.navigateByUrl(this.rota);
+        } else {
             this.router.navigate([`${this.router.url}/cadastro`], { preserveFragment: true });
         }
     }

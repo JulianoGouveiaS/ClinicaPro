@@ -4,12 +4,14 @@ import {ListaPacienteComponent} from "./lista-paciente/lista-paciente.component"
 import {CadastroPacienteComponent} from "./cadastro-paciente/cadastro-paciente.component";
 
 const routes: Routes = [
-    { path: '', data: { breadcrumb: 'Pacientes' }, component: ListaPacienteComponent },
-    { path: 'cadastro', data: { breadcrumb: 'Cadastrar' }, component: CadastroPacienteComponent },
+    { path: '', component: ListaPacienteComponent },
+    { path: 'cadastro', component: CadastroPacienteComponent },
+    { path: 'cadastro/:id', component: CadastroPacienteComponent },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: []
 })
 export class PacienteRoutingModule { }

@@ -1,26 +1,25 @@
 <p-toolbar>
     <div class="p-toolbar-group-start">
         <botao-novo></botao-novo>
-        <botao-limpar (click)="limpar()"></botao-limpar>
     </div>
 </p-toolbar>
 <p-divider></p-divider>
 <p-card class="fluid">
-    <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="pacientes" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Quantity</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-paciente>
             <tr>
-                <td>{{ product.code }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.quantity }}</td>
+                <td>{{ paciente.nome }}</td>
+                <td>{{ paciente.telefone}}</td>
+                <td>
+                    <botao-editar [icone]="true" [objectId]="paciente.id" />
+                </td>
             </tr>
         </ng-template>
     </p-table>

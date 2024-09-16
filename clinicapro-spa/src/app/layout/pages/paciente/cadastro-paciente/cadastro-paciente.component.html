@@ -1,3 +1,4 @@
+<p-toast key="tst"></p-toast>
 <p-toolbar>
     <div class="p-toolbar-group-start">
         <botao-salvar (click)="salvar()"></botao-salvar>
@@ -14,23 +15,37 @@
             </div>
             <div class="field">
                 <label>Documento</label>
-                <input pInputText id="documento" [(ngModel)]="paciente.documento" type="text"/>
+                <p-inputMask
+                    inputId="documento"
+                    mask="999.999.999-99"
+                    [(ngModel)]="paciente.documento"
+                ></p-inputMask>
             </div>
-            <div class="field">
-                <label htmlFor="name1">Data de Nascimento</label>
-                <p-calendar [showIcon]="true" inputId="icon" [(ngModel)]="paciente.dataNascimento"></p-calendar>
+            <div class="p-formgrid grid">
+                <div class="field col-9">
+                    <label htmlFor="age1">Idade</label>
+                    <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.idade" [useGrouping]="false"/>
+                </div>
+                <div class="field col-3">
+                    <label htmlFor="name1">Data de Nascimento</label>
+                    <p-inputMask
+                        inputId="nasc"
+                        mask="99/99/9999"
+                        [(ngModel)]="paciente.dataNascimento"
+                    ></p-inputMask>
+                </div>
             </div>
             <div class="field">
                 <label htmlFor="name1">Telefone</label>
-                <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.telefone" [min]="0" [max]="100"/>
+                <p-inputMask
+                    inputId="Telefone"
+                    mask="(99) 9 99999999"
+                    [(ngModel)]="paciente.telefone"
+                ></p-inputMask>
             </div>
             <div class="field">
                 <label htmlFor="email1">Email</label>
                 <input pInputText id="email1" [(ngModel)]="paciente.email" type="text"/>
-            </div>
-            <div class="field">
-                <label htmlFor="age1">Idade</label>
-                <p-inputNumber [locale]="'pt-BR'" [showButtons]="false" [(ngModel)]="paciente.idade" [min]="0" [max]="100"/>
             </div>
         </div>
 
@@ -44,7 +59,12 @@
             <h5>Endereço</h5>
             <div class="field">
                 <label htmlFor="name1">CEP</label>
-                <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.endereco.cep" [min]="0" [max]="100"/>
+                <p-inputMask
+                    inputId="CEP"
+                    mask="99999-999"
+                    [(ngModel)]="paciente.endereco.cep"
+                    (onComplete)="buscarCEP()"
+                ></p-inputMask>
             </div>
             <div class="p-formgrid grid">
                 <div class="field col-9">
@@ -53,7 +73,7 @@
                 </div>
                 <div class="field col-3">
                     <label htmlFor="numero1">Número</label>
-                    <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.endereco.numero" [min]="0" [max]="100"/>
+                    <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.endereco.numero" [useGrouping]="false"/>
                 </div>
             </div>
             <div class="field">

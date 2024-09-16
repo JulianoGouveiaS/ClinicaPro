@@ -7,8 +7,6 @@ import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CoreComponentsModule } from 'src/app/core/components/core-components.module';
 import { Usuario } from 'src/app/core/models/usuario';
-import { Product } from 'src/app/demo/api/product';
-import { ProductService } from 'src/app/demo/service/product.service';
 import { SimNaoPipe } from 'src/app/core/pipes/sim-nao.pipe';
 
 @Component({

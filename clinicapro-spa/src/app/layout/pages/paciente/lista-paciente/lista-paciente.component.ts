@@ -1,37 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { CardModule } from 'primeng/card';
-import { DividerModule } from 'primeng/divider';
-import { TableModule } from 'primeng/table';
-import { ToolbarModule } from 'primeng/toolbar';
-import { CoreComponentsModule } from 'src/app/core/components/core-components.module';
-import { Product } from 'src/app/demo/api/product';
-import { ProductService } from 'src/app/demo/service/product.service';
+import {Component, OnInit} from '@angular/core';
+import {CardModule} from 'primeng/card';
+import {DividerModule} from 'primeng/divider';
+import {TableModule} from 'primeng/table';
+import {ToolbarModule} from 'primeng/toolbar';
+import {CoreComponentsModule} from 'src/app/core/components/core-components.module';
+import {Paciente} from "../../../../core/models/paciente";
+import {PacienteService} from "../../../../core/services/paciente.service";
 
 @Component({
   selector: 'app-lista-paciente',
   standalone: true,
-  imports: [
-    ToolbarModule,
-    CoreComponentsModule,
-    DividerModule,
-    CardModule,
-    TableModule,
-  ],
+    imports: [
+        ToolbarModule,
+        CoreComponentsModule,
+        DividerModule,
+        CardModule,
+        TableModule,
+    ],
   templateUrl: './lista-paciente.component.html',
   styleUrl: './lista-paciente.component.scss'
 })
 export class ListaPacienteComponent implements OnInit {
 
-    products: Product[] = [];
+    pacientes: Paciente[] = [];
 
-    constructor(private productService: ProductService) {}
+    constructor(private pacienteService: PacienteService) {}
 
     ngOnInit(): void {
-        this.productService.getProducts().then((data) => {
-            this.products = data;
-        });
+        this.buscar();
     }
 
-    limpar() {}
+    async buscar() {
+        this.pacientes = await this.pacienteService.buscarPorUsuarioLogado() || [];
+    }
 
 }

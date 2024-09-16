@@ -11,7 +11,11 @@ export class PacienteService {
     ) {}
 
     salvar(paciente: Paciente) {
-        return this.httpClientService.Post<Paciente[]>('pacientes/novo', paciente);
+        return this.httpClientService.Post<any>('pacientes/novo', paciente);
+    }
+
+    buscarPorUsuarioLogado() {
+        return this.httpClientService.Get<Paciente[]>('pacientes/');
     }
 
 }

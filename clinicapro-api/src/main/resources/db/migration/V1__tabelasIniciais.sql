@@ -55,18 +55,34 @@ CREATE TABLE endereco
     complemento VARCHAR(255),
     referencia  VARCHAR(255)
 );
-CREATE TABLE Paciente
+CREATE TABLE paciente
 (
-    id           SERIAL PRIMARY KEY,
-    tipoCaptacao VARCHAR(255),
+    id            SERIAL PRIMARY KEY,
+    tipo_captacao VARCHAR(255),
     FOREIGN KEY (id) REFERENCES Pessoa (id)
 );
 
-CREATE TABLE FamiliarPaciente
+CREATE TABLE profissional
 (
-    id             SERIAL PRIMARY KEY,
-    nome           VARCHAR(255),
-    relacionamento VARCHAR(255),
-    idPaciente     BIGINT,
-    FOREIGN KEY (idPaciente) REFERENCES Paciente (id)
+    id SERIAL PRIMARY KEY,
+    FOREIGN KEY (id) REFERENCES Pessoa (id)
+);
+
+CREATE TABLE familiar_paciente
+(
+    id          SERIAL PRIMARY KEY,
+    tipo        VARCHAR(255),
+    id_familiar BIGINT,
+    id_paciente BIGINT,
+    FOREIGN KEY (id_paciente) REFERENCES Paciente (id),
+    FOREIGN KEY (id_familiar) REFERENCES Pessoa (id)
+);
+
+CREATE TABLE profissional_paciente
+(
+    id              SERIAL PRIMARY KEY,
+    id_profissional BIGINT,
+    id_paciente     BIGINT,
+    FOREIGN KEY (id_paciente) REFERENCES Paciente (id),
+    FOREIGN KEY (id_profissional) REFERENCES Profissional (id)
 );

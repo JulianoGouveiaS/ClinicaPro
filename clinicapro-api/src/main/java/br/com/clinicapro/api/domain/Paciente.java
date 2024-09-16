@@ -1,6 +1,7 @@
 package br.com.clinicapro.api.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 public class Paciente extends Pessoa {
 
+    @Column(name = "tipo_captacao")
     private String tipoCaptacao;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)

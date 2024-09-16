@@ -4,7 +4,7 @@ import br.com.clinicapro.api.domain.enums.TipoFamiliarEnum;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "familiarpaciente")
+@Table(name = "familiar_paciente")
 public class FamiliarPaciente {
 
     @Id
@@ -14,9 +14,11 @@ public class FamiliarPaciente {
 
     @JoinColumn(name = "tipo")
     private TipoFamiliarEnum tipo;
+
     @ManyToOne
     @JoinColumn(name = "id_familiar", referencedColumnName = "id")
     private Pessoa familiar;
+
     @ManyToOne
     @JoinColumn(name = "id_paciente", referencedColumnName = "id")
     private Pessoa paciente;

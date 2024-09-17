@@ -44,12 +44,10 @@ export class HttpClientService {
 
             request.subscribe(
                 (response) => {
-                    console.log('12342341234132', endpoint)
                     this.ngxUiLoaderService.stop(endpoint);
                     resolve(response);
                 },
                 error => {
-
                     if (requestOptions.handleError) {
                         this.mensagemService.mensagemErroRequisicao(error, endpoint);
                     }
@@ -60,14 +58,13 @@ export class HttpClientService {
                             this.ngxUiLoaderService.stop(endpoint);
                         }
                     }
-                    console.log('asdfasdfasdf', endpoint)
                     resolve(null);
                 }
             );
         })
     }
 
-    private getHandledOptions(options?: HttpOptions, requestOptions?: Partial<RequestOptions>) {
+    private getHandledOptions(options: HttpOptions, requestOptions?: Partial<RequestOptions>) {
         if (isEmpty(requestOptions) || requestOptions.useToken) {
             if (isEmpty(options)) {
                 options = new HttpOptions();
@@ -77,7 +74,7 @@ export class HttpClientService {
             }
             options.headers = options.headers.append('Authorization', 'Bearer ' + this.tokenService.get());
         }
-        return options;
+        return options || new HttpOptions();
     }
 
     public Get<T>(endpoint: string, options?: HttpOptions, requestOptions?: Partial<RequestOptions>) : Promise<T> {

@@ -1,0 +1,12 @@
+<p-autoComplete
+    [(ngModel)]="pessoaSelecionada"
+    [suggestions]="pessoasFiltradas"
+    (completeMethod)="filtrarPessoas($event)"
+    field="nome"
+    (onSelect)="onSelect($event.value)"
+    (onUnselect)="onSelect(null)"
+>
+    <ng-template let-pessoa pTemplate="item">
+        <span>{{ pessoa.nome }} - {{pessoa.documento}}</span>
+    </ng-template>
+</p-autoComplete>

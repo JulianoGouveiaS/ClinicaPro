@@ -1,5 +1,6 @@
 package br.com.clinicapro.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class Usuario implements Serializable {
     @Column(name = "login")
     private String login;
 
+    @JsonIgnore
     @Column(name = "senha")
     private String senha;
 

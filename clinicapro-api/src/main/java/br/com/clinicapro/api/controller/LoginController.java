@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("login")
+@RequestMapping("auth")
 @CrossOrigin("*")
 public class LoginController {
 
@@ -28,6 +28,11 @@ public class LoginController {
     @PreAuthorize("hasAnyAuthority(" + Permissao.Authority.ADMIN + ")")
     public ResponseEntity<?> teste(JwtAuthenticationToken token) {
         return ResponseEntity.ok(token.getTokenAttributes());
+    }
+
+    @GetMapping("/checkJwt")
+    public ResponseEntity<Boolean> checkJwt() {
+        return ResponseEntity.ok(Boolean.TRUE);
     }
 
 }

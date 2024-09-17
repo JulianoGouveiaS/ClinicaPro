@@ -1,6 +1,45 @@
 <p-toolbar>
     <div class="p-toolbar-group-start">
         <botao-voltar></botao-voltar>
+        <botao-salvar (click)="salvar()"></botao-salvar>
     </div>
 </p-toolbar>
 <p-divider></p-divider>
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid">
+            <div class="p-form grid">
+                <div class="field col-12 md:col-4">
+                    <label>Pessoa</label>
+                    <pessoa-autocomplete [(ngModel)]="usuario.pessoa"></pessoa-autocomplete>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label>Login</label>
+					<input pInputText type="text" [(ngModel)]="usuario.login" />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label>Senha</label>
+					<input pInputText type="text" [(ngModel)]="usuario.senha" />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label>Permissões</label>
+                    <permissao-autocomplete [(ngModel)]="usuario.permissoes"></permissao-autocomplete>
+                </div>
+                <div class="field col-12 md:col-4 md:flex md:justify-content-center">
+                    <p-checkbox
+                        [(ngModel)]="usuario.ativo"
+                        [binary]="true"
+                        inputId="binary"
+                        label="Ativo" />
+                </div>
+                <div class="field col-12 md:col-4 md:flex md:justify-content-center">
+                    <p-checkbox
+                        [(ngModel)]="usuario.indicadorUsuarioTemporario"
+                        [binary]="true"
+                        inputId="binary"
+                        label="Usuário Temporário" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

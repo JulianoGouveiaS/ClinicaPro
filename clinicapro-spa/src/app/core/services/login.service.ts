@@ -11,11 +11,14 @@ export class LoginService {
   ) { }
 
   fazerLogin(login: string, senha: string) {
-    return this.httpClientService.Post<string>('login', {login, senha}, {responseType: 'text'}, {useToken:false});
+    return this.httpClientService.Post<string>('auth', {login, senha}, {responseType: 'text'}, {useToken:false});
   }
 
-  teste() {
-    return this.httpClientService.Get('login');
+  checkJwt() : Promise<boolean> {
+    return new Promise<boolean>(async resolve => {
+        const retorno = await this.httpClientService.Get('auth/checkJwt', null, { handleError: false, useToken: true });
+        resolve(!!retorno);
+    });
   }
 
 }

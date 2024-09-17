@@ -1,0 +1,14 @@
+<p-autoComplete
+    [(ngModel)]="permissoesSelecionada"
+    [multiple]="true"
+    [suggestions]="permissoesFiltradas"
+    (completeMethod)="filtrarPermissoes($event)"
+    field="descricao"
+    (onSelect)="onSelect($event.value)"
+    (onUnselect)="onSelect($event.value, true)"
+    [dropdown]="true"
+>
+    <ng-template let-permissao pTemplate="item">
+        <span>{{ permissao.descricao }}</span>
+    </ng-template>
+</p-autoComplete>

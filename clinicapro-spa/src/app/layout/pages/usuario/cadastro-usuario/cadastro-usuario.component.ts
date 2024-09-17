@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { UsuarioService } from './../../../../core/services/usuario.services';
+import { UsuarioService } from '../../../../core/services/usuario.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
@@ -8,16 +8,28 @@ import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CoreComponentsModule } from 'src/app/core/components/core-components.module';
 import { Usuario } from 'src/app/core/models/usuario';
+import { PessoaAutoCompleteComponent } from 'src/app/core/components/autocomplete/pessoa-autocomplete/pessoa-autocomplete.component';
+import { FormsModule } from '@angular/forms';
+import { PermissaoAutoCompleteComponent } from 'src/app/core/components/autocomplete/permissao-autocomplete/permissao-autocomplete.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @Component({
     selector: 'app-cadastro-usuario',
     standalone: true,
     imports: [
+        FormsModule,
         ToolbarModule,
         CoreComponentsModule,
         DividerModule,
         CardModule,
         TableModule,
+        PessoaAutoCompleteComponent,
+        PermissaoAutoCompleteComponent,
+        InputTextModule,
+        CheckboxModule,
+        InputSwitchModule,
     ],
     templateUrl: './cadastro-usuario.component.html',
     styleUrl: './cadastro-usuario.component.scss'
@@ -42,8 +54,18 @@ export class CadastroUsuarioComponent implements OnInit {
             const retorno = await this.usuarioService.buscarPorId(idUsuarioEditando);
             if (!retorno) {
                 this.router.navigateByUrl('/usuario')
+            } else {
+                this.usuario = Object.assign(this.usuario, retorno);
             }
         }
+    }
+
+    isEditando() : boolean {
+        return !!this.usuario?.id;
+    }
+
+    salvar() {
+        console.log(this.usuario.pessoa)
     }
 
 }

@@ -36,7 +36,7 @@ export class PermissaoAutoCompleteComponent implements OnInit, ControlValueAcces
     }
 
     async filtrarPermissoes(event: AutoCompleteCompleteEvent) {
-        await this.permissaoService.filtrar(event.query)
+        await this.permissaoService.filtrar(event.query, false)
             .then(response => {
                 if (response) {
                     this.permissoesFiltradas = [...response];

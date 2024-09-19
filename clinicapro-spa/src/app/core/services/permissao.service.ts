@@ -13,12 +13,12 @@ export class PermissaoService {
         private httpClientService: HttpClientService
     ) {}
 
-    filtrar(nome: string) {
+    filtrar(nome: string, loader: boolean = true) {
         let params = new HttpParams();
         if (!isEmpty(nome)) {
             params = params.append('descricao', nome)
         }
-        return this.httpClientService.Get<Permissao[]>(`${this.path}`, { params });
+        return this.httpClientService.Get<Permissao[]>(`${this.path}`, { params }, { loader: loader });
     }
 
 }

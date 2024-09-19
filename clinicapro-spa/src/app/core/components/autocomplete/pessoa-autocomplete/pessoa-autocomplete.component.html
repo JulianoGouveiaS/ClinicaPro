@@ -1,12 +1,57 @@
-<p-autoComplete
-    [(ngModel)]="pessoaSelecionada"
-    [suggestions]="pessoasFiltradas"
-    (completeMethod)="filtrarPessoas($event)"
-    field="nome"
-    (onSelect)="onSelect($event.value)"
-    (onUnselect)="onSelect(null)"
->
-    <ng-template let-pessoa pTemplate="item">
-        <span>{{ pessoa.nome }} - {{pessoa.documento}}</span>
-    </ng-template>
-</p-autoComplete>
+<div class="flex flex-row justify-content-center align-items-center">
+    <div class="flex-1">
+        <p-autoComplete [styleClass]="'flex-1'" [(ngModel)]="pessoaSelecionada" [suggestions]="pessoasFiltradas"
+            (completeMethod)="filtrarPessoas($event)" field="nome" (onSelect)="onSelect($event.value)"
+            (onUnselect)="onSelect(null)" [showClear]="true">
+            <ng-template let-pessoa pTemplate="item">
+                <span>{{ pessoa.nome }} - {{pessoa.documento}}</span>
+            </ng-template>
+        </p-autoComplete>
+    </div>
+    <i *ngIf="!temPessoaSelecionada()" pRipple class="pi pi-plus text-2xl ml-1 text-primary-800 cursor-pointer" pTooltip="Cadastrar"
+        (click)="mostrarModalPessoa = true">
+    </i>
+</div>
+
+<p-dialog header="Nova Pessoa" [modal]="true" [(visible)]="mostrarModalPessoa">
+    <div class="p-form grid p-fluid">
+        <div class="field col-12">
+            <label>Nome</label>
+            <input pInputText [(ngModel)]="novaPessoa.nome" class="flex-auto" />
+        </div>
+        <div class="field col-12 md:col-3">
+            <label>Documento</label>
+            <p-inputMask
+                class="flex-auto"
+                mask="999.999.999-99"
+                [(ngModel)]="novaPessoa.documento"
+                [autoClear]="true"/>
+        </div>
+        <div class="field col-12 md:col-3">
+            <label>Telefone</label>
+            <p-inputMask
+                class="flex-auto"
+                mask="(99) 99999-9999"
+                [(ngModel)]="novaPessoa.telefone"
+                [autoClear]="true"/>
+        </div>
+        <div class="field col-12 md:col-3">
+            <label>Email</label>
+            <input pInputText [(ngModel)]="novaPessoa.email" class="flex-auto" />
+        </div>
+        <div class="field col-12 md:col-3">
+            <label>Data Nascimento</label>
+            <p-calendar
+                [(ngModel)]="novaPessoa.dataNascimento"
+                [iconDisplay]="'input'"
+                [showIcon]="true"
+                class="flex-auto"
+                appendTo="body">
+            </p-calendar>
+        </div>
+    </div>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (onClick)="fecharModalPessoa()" />
+        <p-button label="Salvar" (onClick)="salvarNovaPessoa()" />
+    </div>
+</p-dialog>

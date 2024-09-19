@@ -6,8 +6,16 @@ export class Usuario {
     pessoa: Pessoa;
     login: string;
     senha: string;
+    novaSenha: string;
     ativo: boolean;
     ultimoLogin: Date;
     indicadorUsuarioTemporario: boolean;
     permissoes: Permissao[];
+
+    constructor(usuario?: Partial<Usuario>) {
+        if (usuario) {
+            Object.assign(this, usuario);
+        }
+    }
+
 }

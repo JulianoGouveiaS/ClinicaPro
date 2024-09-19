@@ -23,7 +23,8 @@ import { authGuard } from './core/guard/auth.guard';
                 ]
             },
             { path: 'auth', loadChildren: () => import('./layout/login/login.module').then(m => m.LoginModule) },
-            { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
+            { path: 'landingold', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
+            { path: 'landing', loadChildren: () => import('./layout/pages/landing/landing.module').then(m => m.LandingModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })

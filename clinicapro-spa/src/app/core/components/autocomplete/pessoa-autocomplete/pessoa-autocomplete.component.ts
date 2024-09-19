@@ -5,13 +5,30 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { Pessoa } from 'src/app/core/models/pessoa';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PessoaService } from 'src/app/core/services/pessoa.service';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { isEmpty, isNumber } from 'lodash';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'pessoa-autocomplete',
     standalone: true,
     imports: [
+        CommonModule,
         AutoCompleteModule,
         FormsModule,
+        TooltipModule,
+        RippleModule,
+        DialogModule,
+        ButtonModule,
+        InputTextModule,
+        CalendarModule,
+        InputMaskModule,
     ],
     templateUrl: './pessoa-autocomplete.component.html',
     providers: [
@@ -29,6 +46,9 @@ export class PessoaAutoCompleteComponent implements OnInit, ControlValueAccessor
     pessoaSelecionada: Pessoa;
     pessoasFiltradas: Pessoa[] = [];
 
+    mostrarModalPessoa: boolean = false;
+    novaPessoa: Pessoa = new Pessoa();
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private usuarioService: UsuarioService,
@@ -40,7 +60,7 @@ export class PessoaAutoCompleteComponent implements OnInit, ControlValueAccessor
     }
 
     async filtrarPessoas(event: AutoCompleteCompleteEvent) {
-        await this.pessoaService.filtrar(event.query)
+        await this.pessoaService.filtrar(event.query, { backgroundLoader: true })
             .then(response => {
                 if (response) {
                     this.pessoasFiltradas = [...response];
@@ -83,5 +103,24 @@ export class PessoaAutoCompleteComponent implements OnInit, ControlValueAccessor
             this.onTouched();
         }
     }
+
+    temPessoaSelecionada() : boolean {
+        return !!this.pessoaSelecionada && isNumber(this.pessoaSelecionada.id);
+    }
+
+    fecharModalPessoa() {
+        this.mostrarModalPessoa = false;
+        this.novaPessoa = new Pessoa();
+    }
+
+    async salvarNovaPessoa() {
+        const pessoaSalva = await this.pessoaService.salvar(this.novaPessoa);
+        if (pessoaSalva && isNumber(pessoaSalva.id)) {
+            this.mostrarModalPessoa = false;
+            this.novaPessoa = new Pessoa();
+            this.onSelect(pessoaSalva);
+        }
+    }
+
 
 }

@@ -30,10 +30,6 @@ export class HttpClientService {
 
     private handleRequest<T>(endpoint: string, request: Observable<T>, requestOptions: Partial<RequestOptions> = {}) {
         return new Promise<T>(resolve => {
-
-            // Instancia o requestOptions para preencher valores default
-            requestOptions = new RequestOptions(requestOptions);
-
             if (requestOptions.wantLoader()) {
                 if (requestOptions.backgroundLoader) {
                     this.ngxUiLoaderService.startBackground(endpoint);
@@ -78,6 +74,8 @@ export class HttpClientService {
     }
 
     public Get<T>(endpoint: string, options?: HttpOptions, requestOptions?: Partial<RequestOptions>) : Promise<T> {
+        // Instancia o requestOptions para preencher valores default
+        requestOptions = new RequestOptions(requestOptions);
         return this.handleRequest<T>(
             endpoint,
             this.httpClient.get<T>(
@@ -89,6 +87,8 @@ export class HttpClientService {
     }
 
     public Post<T>(endpoint: string, body?: any, options?: HttpOptions, requestOptions?: Partial<RequestOptions>) {
+        // Instancia o requestOptions para preencher valores default
+        requestOptions = new RequestOptions(requestOptions);
         return this.handleRequest<T>(
             endpoint,
             this.httpClient.post<T>(
@@ -101,6 +101,8 @@ export class HttpClientService {
     }
 
     public Put<T>(endpoint: string, body?: any, options?: HttpOptions, requestOptions?: Partial<RequestOptions>) {
+        // Instancia o requestOptions para preencher valores default
+        requestOptions = new RequestOptions(requestOptions);
         return this.handleRequest<T>(
             endpoint,
             this.httpClient.put<T>(
@@ -113,6 +115,8 @@ export class HttpClientService {
     }
 
     public Delete<T>(endpoint: string, options?: HttpOptions, requestOptions?: Partial<RequestOptions>) {
+        // Instancia o requestOptions para preencher valores default
+        requestOptions = new RequestOptions(requestOptions);
         return this.handleRequest<T>(
             endpoint,
             this.httpClient.delete<T>(

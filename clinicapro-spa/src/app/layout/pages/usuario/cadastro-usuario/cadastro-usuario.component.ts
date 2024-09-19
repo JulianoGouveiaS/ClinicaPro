@@ -1,3 +1,4 @@
+import { MensagemService } from './../../../../core/services/mensagem.service';
 import { Location } from '@angular/common';
 import { UsuarioService } from '../../../../core/services/usuario.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -14,6 +15,7 @@ import { PermissaoAutoCompleteComponent } from 'src/app/core/components/autocomp
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { isNumber } from 'lodash';
 
 @Component({
     selector: 'app-cadastro-usuario',
@@ -41,7 +43,8 @@ export class CadastroUsuarioComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private usuarioService: UsuarioService,
-        private router: Router
+        private router: Router,
+        private mensagemService: MensagemService,
     ) {}
 
     ngOnInit() {
@@ -53,7 +56,7 @@ export class CadastroUsuarioComponent implements OnInit {
         if (idUsuarioEditando > 0) {
             const retorno = await this.usuarioService.buscarPorId(idUsuarioEditando);
             if (!retorno) {
-                this.router.navigateByUrl('/usuario')
+                this.router.navigateByUrl('/usuario');
             } else {
                 this.usuario = Object.assign(this.usuario, retorno);
             }
@@ -64,8 +67,13 @@ export class CadastroUsuarioComponent implements OnInit {
         return !!this.usuario?.id;
     }
 
-    salvar() {
-        console.log(this.usuario.pessoa)
+    async salvar() {
+        const usuarioSalvo = await this.usuarioService.salvar(this.usuario);
+        if (usuarioSalvo && isNumber(usuarioSalvo.id)) {
+            this.usuario = new Usuario(usuarioSalvo);
+            this.usuario.novaSenha = null;
+            this.mensagemService.sucesso({ detail: 'Usuário salvo com sucesso' })
+        }
     }
 
 }

@@ -1,22 +1,22 @@
 import { MensagemService } from './../../../../core/services/mensagem.service';
-import {Component, OnInit} from '@angular/core';
-import {CalendarModule} from "primeng/calendar";
-import {InputNumberModule} from "primeng/inputnumber";
-import {InputTextModule} from "primeng/inputtext";
-import {CoreComponentsModule} from "../../../../core/components/core-components.module";
-import {ToolbarModule} from "primeng/toolbar";
-import {FormsModule} from "@angular/forms";
-import {Paciente} from "../../../../core/models/paciente";
-import {PacienteService} from "../../../../core/services/paciente.service";
-import {Endereco} from "../../../../core/models/Endereco";
-import {ValidationHelper} from "../../../../core/utils/ValidationHelper";
-import {MessageService} from "primeng/api";
-import {MessagesModule} from "primeng/messages";
-import {ToastModule} from "primeng/toast";
-import {InputMaskModule} from "primeng/inputmask";
-import {CepService} from "../../../../core/services/cep.service";
-import {Usuario} from "../../../../core/models/usuario";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { CalendarModule } from "primeng/calendar";
+import { InputNumberModule } from "primeng/inputnumber";
+import { InputTextModule } from "primeng/inputtext";
+import { CoreComponentsModule } from "../../../../core/components/core-components.module";
+import { ToolbarModule } from "primeng/toolbar";
+import { FormsModule } from "@angular/forms";
+import { Paciente } from "../../../../core/models/paciente";
+import { PacienteService } from "../../../../core/services/paciente.service";
+import { Endereco } from "../../../../core/models/Endereco";
+import { ValidationHelper } from "../../../../core/utils/ValidationHelper";
+import { MessageService } from "primeng/api";
+import { MessagesModule } from "primeng/messages";
+import { ToastModule } from "primeng/toast";
+import { InputMaskModule } from "primeng/inputmask";
+import { CepService } from "../../../../core/services/cep.service";
+import { Usuario } from "../../../../core/models/usuario";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
     selector: 'app-cadastro-usuario',
@@ -36,13 +36,40 @@ import {Router} from "@angular/router";
     styleUrl: './cadastro-paciente.component.scss'
 })
 export class CadastroPacienteComponent implements OnInit {
+
     paciente: Paciente = new Paciente();
 
+    constructor(
+        private pacienteService: PacienteService,
+        private activatedRoute: ActivatedRoute,
+        private mensagemService: MensagemService,
+        private cepService: CepService,
+        private router: Router,
+    ) {
+    }
 
-    constructor(private pacienteService: PacienteService,
-                private mensagemService: MensagemService,
-                private cepService: CepService,
-                private router: Router) {
+    ngOnInit(): void {
+        this.verificarPacienteEditando();
+    }
+
+    async verificarPacienteEditando() {
+        const idPacienteEditando = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+        if (idPacienteEditando > 0) {
+            const retorno = await this.pacienteService.buscarPorId(idPacienteEditando);
+            if (!retorno) {
+                this.router.navigateByUrl('/paciente');
+            } else {
+                this.paciente = Object.assign(this.paciente, retorno);
+            }
+        }
+    }
+
+    isEditando(): boolean {
+        return !!this.paciente?.id;
+    }
+
+    limpar() {
+
     }
 
     buscarCEP() {
@@ -74,21 +101,13 @@ export class CadastroPacienteComponent implements OnInit {
         }
     }
 
-    ngOnInit(): void {
-        this.paciente.endereco = new Endereco();
-    }
-
-    limpar() {
-
-    }
-
     validarCampos() {
         if (!ValidationHelper.validarCampoObrigatorio(this.paciente.nome)) {
-            this.mensagemService.aviso({ detail: 'Nome Invalido'});
+            this.mensagemService.aviso({ detail: 'Nome Invalido' });
             return false
         }
         if (!ValidationHelper.validarTelefone(this.paciente.telefone)) {
-            this.mensagemService.aviso({ detail: 'Telefone Invalido'});
+            this.mensagemService.aviso({ detail: 'Telefone Invalido' });
             return false
         }
         // if (!ValidationHelper.validarEmail(this.paciente.email)) {
@@ -111,10 +130,10 @@ export class CadastroPacienteComponent implements OnInit {
 
     construirBody(): Paciente {
         let body: Paciente = this.paciente;
-        if(this.paciente.dataNascimento){
+        if (this.paciente.dataNascimento) {
             body.dataNascimento = new Date(this.paciente.dataNascimento);
         }
-        if(this.paciente.telefone){
+        if (this.paciente.telefone) {
             body.telefone = this.paciente.telefone.replace(/\D/g, ''); // Remove qualquer caractere não numérico
         }
 
@@ -127,7 +146,7 @@ export class CadastroPacienteComponent implements OnInit {
         if (valido) {
             let usuarioSalvo: Usuario = await this.pacienteService.salvar(body)
             if (usuarioSalvo && usuarioSalvo.id)
-                this.mensagemService.add({
+                this.mensagemService.sucesso({
                     detail: 'Paciente salvo com sucesso'
                 });
         }

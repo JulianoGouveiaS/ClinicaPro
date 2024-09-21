@@ -6,16 +6,21 @@ import {Paciente} from "../models/paciente";
 @Injectable({ providedIn: 'root' })
 export class PacienteService {
 
+    readonly path = 'pacientes';
+
     constructor(
         private httpClientService: HttpClientService
     ) {}
 
     salvar(paciente: Paciente) {
-        return this.httpClientService.Post<any>('pacientes/novo', paciente);
+        return this.httpClientService.Post<any>(`${this.path}/novo`, paciente);
     }
 
     buscarPorUsuarioLogado() {
-        return this.httpClientService.Get<Paciente[]>('pacientes/');
+        return this.httpClientService.Get<Paciente[]>(`${this.path}/`);
     }
 
+    buscarPorId(idPaciente: number) {
+        return this.httpClientService.Get<Paciente>(`${this.path}/${idPaciente}`);
+    }
 }

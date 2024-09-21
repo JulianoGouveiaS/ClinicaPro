@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
-
     readonly path = 'usuarios';
 
     constructor(
@@ -31,4 +30,9 @@ export class UsuarioService {
     salvar(usuario: Usuario) {
         return this.httpClientService.Post<Usuario>(`${this.path}`, usuario);
     }
+
+    ativarInativarUsuario(usuario: Usuario) {
+        return this.httpClientService.Put<boolean>(`${this.path}/ativarInativar`, usuario.id);
+    }
+
 }

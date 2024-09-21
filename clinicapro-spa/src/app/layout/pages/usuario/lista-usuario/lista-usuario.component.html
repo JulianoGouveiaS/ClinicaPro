@@ -10,9 +10,9 @@
             <tr>
                 <th>Nome</th>
                 <th>Login</th>
-                <th>Ativo</th>
-                <th>Temporário</th>
                 <th>Último Login</th>
+                <th>Temporário</th>
+                <th></th>
                 <th></th>
             </tr>
         </ng-template>
@@ -20,9 +20,16 @@
             <tr>
                 <td>{{ usuario.pessoa.nome }}</td>
                 <td>{{ usuario.login }}</td>
-                <td>{{ usuario.ativo | simNao }}</td>
-                <td>{{ usuario.indicadorUsuarioTemporario | simNao }}</td>
                 <td>{{ usuario.ultimoLogin | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ usuario.indicadorUsuarioTemporario | simNao }}</td>
+                <td>
+                    <p-tag
+                        class="cursor-pointer"
+                        (click)="ativarInativarUsuario(usuario)"
+                        [value]="usuario.ativo  ? 'Ativo' : 'Inativo'"
+                        [severity]="usuario.ativo ? 'info' : 'danger'"
+                        [pTooltip]="'Clique para ' + (usuario.ativo ? 'inativar' : 'ativar') + ''"/>
+                </td>
                 <td>
                     <botao-editar [icone]="true" [objectId]="usuario.id" />
                 </td>

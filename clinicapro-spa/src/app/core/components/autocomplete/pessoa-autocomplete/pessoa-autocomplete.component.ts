@@ -14,6 +14,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { isEmpty, isNumber } from 'lodash';
 import { CommonModule } from '@angular/common';
+import { PossuiPermissaoDirective } from 'src/app/core/directives/possui-permissao.directive';
 
 @Component({
     selector: 'pessoa-autocomplete',
@@ -29,6 +30,7 @@ import { CommonModule } from '@angular/common';
         InputTextModule,
         CalendarModule,
         InputMaskModule,
+        PossuiPermissaoDirective,
     ],
     templateUrl: './pessoa-autocomplete.component.html',
     providers: [
@@ -36,7 +38,7 @@ import { CommonModule } from '@angular/common';
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => PessoaAutoCompleteComponent),
             multi: true
-        }
+        },
     ]
 })
 export class PessoaAutoCompleteComponent implements OnInit, ControlValueAccessor {

@@ -8,9 +8,11 @@
             </ng-template>
         </p-autoComplete>
     </div>
-    <i *ngIf="!temPessoaSelecionada()" pRipple class="pi pi-plus text-2xl ml-1 text-primary-800 cursor-pointer" pTooltip="Cadastrar"
-        (click)="mostrarModalPessoa = true">
-    </i>
+    <div *ngIf="!temPessoaSelecionada()">
+        <i *possuiPermissao="'ADMIN'" pRipple class="pi pi-plus text-2xl ml-1 text-primary-800 cursor-pointer" pTooltip="Cadastrar"
+            (click)="mostrarModalPessoa = true">
+        </i>
+    </div>
 </div>
 
 <p-dialog header="Nova Pessoa" [modal]="true" [(visible)]="mostrarModalPessoa">

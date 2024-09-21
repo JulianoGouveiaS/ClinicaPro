@@ -16,6 +16,7 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ProductService } from './demo/service/product.service';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 
 registerLocaleData(localePt);
 
@@ -39,7 +40,9 @@ registerLocaleData(localePt);
         PhotoService,
         ProductService,
         MessageService,
-        ConfirmationService
+        ConfirmationService,
+        JwtHelperService,
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }
     ],
     bootstrap: [AppComponent],
 })

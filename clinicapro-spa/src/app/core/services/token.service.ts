@@ -1,11 +1,21 @@
 import { LocalStorageService } from './local-storage.service';
 import { Injectable } from "@angular/core";
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+class DecodedJwt {
+    exp: number;
+    iat: number;
+    iss: string;
+    scope: string[] = [];
+    sub: string;
+}
 
 @Injectable({providedIn: 'root'})
 export class TokenService {
 
     constructor(
         private localStorageService: LocalStorageService,
+        private jwtHelperService: JwtHelperService
     ) {
     }
 
@@ -15,5 +25,9 @@ export class TokenService {
 
     get() : string {
         return this.localStorageService.getItem('tknCliPro');
+    }
+
+    getDecoded() : DecodedJwt {
+        return this.jwtHelperService.decodeToken(this.get());
     }
 }

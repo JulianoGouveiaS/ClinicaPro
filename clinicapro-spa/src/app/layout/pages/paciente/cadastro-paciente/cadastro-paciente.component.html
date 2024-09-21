@@ -14,20 +14,20 @@
                 <label htmlFor="name1">Nome</label>
                 <input pInputText id="nome" [(ngModel)]="paciente.nome" type="text"/>
             </div>
-            <div class="field">
-                <label>Documento</label>
-                <p-inputMask
-                    inputId="documento"
-                    mask="999.999.999-99"
-                    [(ngModel)]="paciente.documento"
-                ></p-inputMask>
-            </div>
             <div class="p-formgrid grid">
-                <div class="field col-9">
+                <div class="field col-12 md:col-6">
+                    <label>Documento</label>
+                    <p-inputMask
+                        inputId="documento"
+                        mask="999.999.999-99"
+                        [(ngModel)]="paciente.documento"
+                    ></p-inputMask>
+                </div>
+                <!--<div class="field col-9">
                     <label htmlFor="age1">Idade</label>
                     <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.idade" [useGrouping]="false"/>
-                </div>
-                <div class="field col-3">
+                </div>-->
+                <div class="field col-12 md:col-6">
                     <label htmlFor="name1">Data de Nascimento</label>
                     <p-inputMask
                         inputId="nasc"
@@ -36,17 +36,19 @@
                     ></p-inputMask>
                 </div>
             </div>
-            <div class="field">
-                <label htmlFor="name1">Telefone</label>
-                <p-inputMask
-                    inputId="Telefone"
-                    mask="(99) 9 99999999"
-                    [(ngModel)]="paciente.telefone"
-                ></p-inputMask>
-            </div>
-            <div class="field">
-                <label htmlFor="email1">Email</label>
-                <input pInputText id="email1" [(ngModel)]="paciente.email" type="text"/>
+            <div class="grid">
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="name1">Telefone</label>
+                    <p-inputMask
+                        inputId="Telefone"
+                        mask="(99) 9 99999999"
+                        [(ngModel)]="paciente.telefone"
+                    ></p-inputMask>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="email1">Email</label>
+                    <input pInputText id="email1" [(ngModel)]="paciente.email" type="text"/>
+                </div>
             </div>
         </div>
 

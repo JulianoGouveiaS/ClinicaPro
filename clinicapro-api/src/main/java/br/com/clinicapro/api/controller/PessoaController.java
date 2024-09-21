@@ -28,4 +28,10 @@ public class PessoaController {
     ) {
         return ResponseEntity.ok(pessoaService.filtrar(nome, documento));
     }
+
+    @PostMapping
+    @PreAuthorize("hasAnyAuthority(" + Permissao.Authority.ADMIN + ")")
+    public ResponseEntity<Pessoa> salvar(@RequestBody Pessoa pessoa) {
+        return ResponseEntity.ok(pessoaService.salvar(pessoa));
+    }
 }

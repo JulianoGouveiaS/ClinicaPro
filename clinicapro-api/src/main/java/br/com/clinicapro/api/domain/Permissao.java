@@ -1,5 +1,6 @@
 package br.com.clinicapro.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -43,10 +44,12 @@ public class Permissao implements Serializable {
         this.indicadorPermissaoPublica = indicadorPermissaoPublica;
     }
 
+    @JsonIgnore
     public boolean isAdmin() {
         return "ADMIN".equals(this.getDescricao());
     }
 
+    @JsonIgnore
     public boolean isProfissional() {
         return "PROFISSIONAL".equals(this.getDescricao());
     }

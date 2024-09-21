@@ -27,6 +27,9 @@ public class Usuario implements Serializable {
     @Column(name = "senha")
     private String senha;
 
+    @Transient
+    private String novaSenha;
+
     @Column(name = "ativo")
     private Boolean ativo;
 
@@ -36,7 +39,7 @@ public class Usuario implements Serializable {
     @Column(name = "usuario_temporario")
     private Boolean indicadorUsuarioTemporario;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "permissao_usuario",
             joinColumns = @JoinColumn(name = "id_usuario"),
@@ -74,6 +77,14 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getNovaSenha() {
+        return novaSenha;
+    }
+
+    public void setNovaSenha(String novaSenha) {
+        this.novaSenha = novaSenha;
     }
 
     public Boolean getAtivo() {

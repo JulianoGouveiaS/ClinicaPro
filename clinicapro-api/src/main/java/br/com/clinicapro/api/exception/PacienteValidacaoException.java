@@ -1,12 +1,12 @@
 package br.com.clinicapro.api.exception;
 
-public class PacienteException extends RuntimeException {
+public class PacienteValidacaoException extends RuntimeException {
 
-    public PacienteException() {
+    public PacienteValidacaoException() {
         super();
     }
 
-    public PacienteException(String message) {
+    public PacienteValidacaoException(String message) {
         super(message);
     }
 }

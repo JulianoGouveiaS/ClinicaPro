@@ -1,12 +1,15 @@
 package br.com.clinicapro.api.service;
 
-import br.com.clinicapro.api.domain.*;
+import br.com.clinicapro.api.domain.Paciente;
+import br.com.clinicapro.api.domain.Pessoa;
+import br.com.clinicapro.api.domain.ProfissionalPaciente;
+import br.com.clinicapro.api.domain.Usuario;
 import br.com.clinicapro.api.exception.AcessoNegadoException;
-import br.com.clinicapro.api.exception.PacienteException;
+import br.com.clinicapro.api.exception.PacienteNaoEncontradoException;
+import br.com.clinicapro.api.exception.PacienteValidacaoException;
 import br.com.clinicapro.api.repository.PacienteRepository;
 import br.com.clinicapro.api.repository.ProfissionalPacienteRepository;
 import br.com.clinicapro.api.repository.ProfissionalRepository;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -39,10 +42,10 @@ public class PacienteService {
 
     private void validarSave(Paciente paciente) {
         if (paciente == null) {
-            throw new PacienteException("Paciente nao informado.");
+            throw new PacienteValidacaoException("Paciente nao informado.");
         }
         if (!StringUtils.hasText(paciente.getNome())) {
-            throw new PacienteException("Nome nao informado.");
+            throw new PacienteValidacaoException("Nome nao informado.");
         }
         //tirei para deixar apenas o minimo necessario como obrigatorio
 //        if (!StringUtils.hasText(paciente.getDocumento())) {
@@ -72,4 +75,13 @@ public class PacienteService {
     }
 
 
+    public Paciente buscarPorId(Usuario usuarioLogado, Long id) {
+        if (usuarioLogado.isAdmin()) {
+            return pacienteRepository.findById(id).orElseThrow(PacienteNaoEncontradoException::new);
+        }
+        if (usuarioLogado.isProfissional()) {
+            return pacienteRepository.buscarPorIdEProfissional(id, usuarioLogado.getId());
+        }
+        throw new PacienteNaoEncontradoException();
+    }
 }

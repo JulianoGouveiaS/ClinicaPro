@@ -36,4 +36,11 @@ public class PacienteController {
         return ResponseEntity.ok(pacienteService.buscarPorUsuarioLogado(usuarioLogado));
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority(" + Permissao.Authority.ADMIN + "," + Permissao.Authority.PROFISSIONAL + ")")
+    public ResponseEntity<Paciente> buscarPorId(JwtAuthenticationToken token, @PathVariable Long id) {
+        Usuario usuarioLogado = usuarioService.getUsuarioToken(token);
+        return ResponseEntity.ok(pacienteService.buscarPorId(usuarioLogado, id));
+    }
+
 }

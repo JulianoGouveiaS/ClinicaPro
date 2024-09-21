@@ -1,6 +1,7 @@
 package br.com.clinicapro.api.controller;
 
 import br.com.clinicapro.api.domain.Permissao;
+import br.com.clinicapro.api.domain.Pessoa;
 import br.com.clinicapro.api.domain.Usuario;
 import br.com.clinicapro.api.dto.UsuarioCadastroDTO;
 import br.com.clinicapro.api.service.UsuarioService;
@@ -39,4 +40,15 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarPorId(usuarioLogado, id));
     }
 
+    @PostMapping
+    @PreAuthorize("hasAnyAuthority(" + Permissao.Authority.ADMIN + ")")
+    public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok(usuarioService.salvar(usuario));
+    }
+
+    @PutMapping("/ativarInativar")
+    @PreAuthorize("hasAnyAuthority(" + Permissao.Authority.ADMIN + ")")
+    public ResponseEntity<Boolean> ativarInativar(@RequestBody Long idUsuario) {
+        return ResponseEntity.ok(usuarioService.ativarInativar(idUsuario));
+    }
 }

@@ -1,5 +1,6 @@
 package br.com.clinicapro.api.service;
 
+import br.com.clinicapro.api.domain.Pessoa;
 import br.com.clinicapro.api.domain.Usuario;
 import br.com.clinicapro.api.dto.LoginRequest;
 import br.com.clinicapro.api.exception.*;
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,8 +41,13 @@ public class UsuarioService {
         if (usuario == null) {
             throw new LoginException("Usuário não encontrado");
         }
+        if (Boolean.FALSE.equals(usuario.getAtivo())) {
+            throw new UsuarioInativoException(usuario.getLogin());
+        }
         boolean senhaCorreta = bCryptPasswordEncoder.matches(loginRequest.senha(), usuario.getSenha());
         if (senhaCorreta) {
+            usuario.setUltimoLogin(LocalDateTime.now());
+            usuarioRepository.save(usuario);
             return JwtUtil.gerarToken(this.jwtEncoder, usuario);
         } else {
             throw new LoginException("Usuário e/ou senha inválido");
@@ -79,4 +86,42 @@ public class UsuarioService {
         throw new AcessoNegadoException();
     }
 
+    private void antesSalvar(Usuario usuario) {
+        if (usuario == null) {
+            throw new UsuarioValidacaoException("Objeto informado é inválido");
+        }
+        if (usuario.getPessoa() == null || usuario.getPessoa().getId() == null) {
+            throw new UsuarioValidacaoException("Usuário informado não tem um cadastro de pessoa associado");
+        }
+        if (!StringUtils.hasText(usuario.getLogin())) {
+            throw new UsuarioValidacaoException("O campo de login é obrigatório");
+        }
+        // Se for um cadastro novo, então o campo novaSenha é obrigatório
+        if (usuario.getId() == null && (!StringUtils.hasText(usuario.getNovaSenha()) || usuario.getNovaSenha().trim().length() < 7)) {
+            throw new UsuarioValidacaoException("Informe uma senha válida de no mínimo 7 caracteres");
+        }
+    }
+
+    public Usuario salvar(Usuario usuario) {
+        antesSalvar(usuario);
+        boolean editando = usuario.getId() != null;
+        if (StringUtils.hasText(usuario.getNovaSenha())) {
+            usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getNovaSenha()));
+        } else if (editando && !StringUtils.hasText(usuario.getSenha())) {
+            // Caso esteja editando e não está trocando a senha, então recupera a senha do banco para atualizar
+            Usuario usuarioBancoDados = usuarioRepository.findById(usuario.getId()).orElseThrow(() -> new UsuarioNaoEncontradoException(usuario.getLogin()));
+            usuario.setSenha(usuarioBancoDados.getSenha());
+        }
+        return usuarioRepository.save(usuario);
+    }
+
+    public Boolean ativarInativar(Long idUsuario) {
+        if (idUsuario == null) {
+            throw new UsuarioNaoEncontradoException();
+        }
+        Usuario usuarioEncontrado = usuarioRepository.findById(idUsuario).orElseThrow(UsuarioNaoEncontradoException::new);
+        usuarioEncontrado.setAtivo(!usuarioEncontrado.getAtivo());
+        usuarioRepository.save(usuarioEncontrado);
+        return true;
+    }
 }

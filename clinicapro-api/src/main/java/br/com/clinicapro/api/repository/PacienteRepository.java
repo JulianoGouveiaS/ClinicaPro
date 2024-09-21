@@ -11,9 +11,16 @@ import java.util.List;
 @Repository
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
-
     @Query(value = "SELECT p.* FROM Paciente p " +
             "JOIN profissional_paciente pp ON p.id = pp.id_paciente " +
             "WHERE pp.id_profissional = :idProfissional", nativeQuery = true)
     List<Paciente> findAllByProfissionalId(@Param("idProfissional") Long idProfissional);
+
+    @Query(value = "Select p From Paciente p " +
+            "JOIN profissional_paciente pp ON p.id = pp.id_paciente " +
+            "Where pp.id_profissional = :idProfissional" +
+            "  And p.id = :idPaciente "
+            , nativeQuery = true)
+    Paciente buscarPorIdEProfissional(Long idPaciente, Long idProfissional);
+
 }

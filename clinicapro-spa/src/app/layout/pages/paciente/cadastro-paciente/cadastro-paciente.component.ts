@@ -1,3 +1,4 @@
+import { MensagemService } from './../../../../core/services/mensagem.service';
 import {Component, OnInit} from '@angular/core';
 import {CalendarModule} from "primeng/calendar";
 import {InputNumberModule} from "primeng/inputnumber";
@@ -39,7 +40,7 @@ export class CadastroPacienteComponent implements OnInit {
 
 
     constructor(private pacienteService: PacienteService,
-                private messageService: MessageService,
+                private mensagemService: MensagemService,
                 private cepService: CepService,
                 private router: Router) {
     }
@@ -56,18 +57,14 @@ export class CadastroPacienteComponent implements OnInit {
                         this.paciente.endereco.cidade = dados.localidade;
                         this.paciente.endereco.estado = dados.uf;
                     } else {
-                        this.messageService.add({
-                            key: 'tst',
-                            severity: 'error',
+                        this.mensagemService.aviso({
                             summary: 'Oops!',
                             detail: 'CEP nao encontrado'
                         });
                     }
                 },
                 (error) => {
-                    this.messageService.add({
-                        key: 'tst',
-                        severity: 'error',
+                    this.mensagemService.erro({
                         summary: 'Oops!',
                         detail: 'Erro ao buscar o CEP'
                     });
@@ -87,25 +84,25 @@ export class CadastroPacienteComponent implements OnInit {
 
     validarCampos() {
         if (!ValidationHelper.validarCampoObrigatorio(this.paciente.nome)) {
-            this.messageService.add({key: 'tst', severity: 'error', summary: 'Oops!', detail: 'Nome Invalido'});
+            this.mensagemService.aviso({ detail: 'Nome Invalido'});
             return false
         }
         if (!ValidationHelper.validarTelefone(this.paciente.telefone)) {
-            this.messageService.add({key: 'tst', severity: 'error', summary: 'Oops!', detail: 'Telefone Invalido'});
+            this.mensagemService.aviso({ detail: 'Telefone Invalido'});
             return false
         }
         // if (!ValidationHelper.validarEmail(this.paciente.email)) {
-        //     this.messageService.add({key: 'tst', severity: 'error', summary: 'Oops!', detail: 'Email Invalido'});
+        //     this.mensagemService.aviso({ detail: 'Email Invalido'});
         //     return false
         // }
         //
         // if (!ValidationHelper.validarCPF(this.paciente.documento)) {
-        //     this.messageService.add({key: 'tst', severity: 'error', summary: 'Oops!', detail: 'Documento Invalido'});
+        //     this.mensagemService.aviso({ detail: 'Documento Invalido'});
         //     return false
         // }
         //
         // if (!this.paciente.dataNascimento) {
-        //     this.messageService.add({key: 'tst', severity: 'error', summary: 'Oops!', detail: 'Data de Nascimento Invalido'});
+        //     this.mensagemService.aviso({ detail: 'Data de Nascimento Invalido'});
         //     return false
         // }
 
@@ -130,11 +127,8 @@ export class CadastroPacienteComponent implements OnInit {
         if (valido) {
             let usuarioSalvo: Usuario = await this.pacienteService.salvar(body)
             if (usuarioSalvo && usuarioSalvo.id)
-                this.messageService.add({
-                    key: 'tst',
-                    severity: 'success',
-                    summary: 'Success Message',
-                    detail: 'Message sent'
+                this.mensagemService.add({
+                    detail: 'Paciente salvo com sucesso'
                 });
         }
     }

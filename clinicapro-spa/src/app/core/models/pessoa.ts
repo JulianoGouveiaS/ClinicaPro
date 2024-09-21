@@ -8,7 +8,6 @@ export class Pessoa {
     email: string;
     telefone: string;
     dataCadastro: Date;
-    idade: number;
     endereco: Endereco = new Endereco();
 
     constructor(pessoa?: Partial<Pessoa>) {

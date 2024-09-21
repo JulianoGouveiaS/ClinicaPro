@@ -23,17 +23,15 @@
                         [(ngModel)]="paciente.documento"
                     ></p-inputMask>
                 </div>
-                <!--<div class="field col-9">
-                    <label htmlFor="age1">Idade</label>
-                    <p-inputNumber [showButtons]="false" [(ngModel)]="paciente.idade" [useGrouping]="false"/>
-                </div>-->
                 <div class="field col-12 md:col-6">
-                    <label htmlFor="name1">Data de Nascimento</label>
-                    <p-inputMask
-                        inputId="nasc"
-                        mask="99/99/9999"
+                    <label>Data Nascimento</label>
+                    <p-calendar
                         [(ngModel)]="paciente.dataNascimento"
-                    ></p-inputMask>
+                        [iconDisplay]="'input'"
+                        [showIcon]="true"
+                        class="flex-auto"
+                        appendTo="body">
+                    </p-calendar>
                 </div>
             </div>
             <div class="grid">

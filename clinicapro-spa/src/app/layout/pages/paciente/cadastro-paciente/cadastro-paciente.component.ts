@@ -17,6 +17,8 @@ import { InputMaskModule } from "primeng/inputmask";
 import { CepService } from "../../../../core/services/cep.service";
 import { Usuario } from "../../../../core/models/usuario";
 import { ActivatedRoute, Router } from "@angular/router";
+import * as lodash from 'lodash';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-cadastro-usuario',
@@ -128,24 +130,21 @@ export class CadastroPacienteComponent implements OnInit {
         return true
     }
 
-    construirBody(): Paciente {
-        let body: Paciente = this.paciente;
-        if (this.paciente.dataNascimento) {
-            body.dataNascimento = new Date(this.paciente.dataNascimento);
-        }
-        if (this.paciente.telefone) {
-            body.telefone = this.paciente.telefone.replace(/\D/g, ''); // Remove qualquer caractere não numérico
-        }
+    construirBody() {
+        //this.paciente.idade = moment(new Date()).diff(this.paciente.dataNascimento, 'years');
 
-        return body;
+        if (this.paciente.telefone) {
+            this.paciente.telefone = this.paciente.telefone.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+        }
     }
 
     async salvar() {
         let valido = this.validarCampos()
-        let body = this.construirBody()
+        this.construirBody()
         if (valido) {
-            let usuarioSalvo: Usuario = await this.pacienteService.salvar(body)
-            if (usuarioSalvo && usuarioSalvo.id)
+            let pacienteSalvo: Paciente = await this.pacienteService.salvar(this.paciente)
+            if (pacienteSalvo && pacienteSalvo.id)
+                this.paciente = new Paciente(pacienteSalvo);
                 this.mensagemService.sucesso({
                     detail: 'Paciente salvo com sucesso'
                 });
